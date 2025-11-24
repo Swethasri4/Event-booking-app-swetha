@@ -1,0 +1,32 @@
+<mat-toolbar color="primary" *ngIf="authService.isLoggedIn()">
+  <span>{{ title }}</span>
+  <span class="spacer"></span>
+  
+  <button mat-button (click)="navigateToCalendar()">
+    <mat-icon>calendar_today</mat-icon>
+    Calendar
+  </button>
+  
+  <button mat-button (click)="navigateToPreferences()">
+    <mat-icon>settings</mat-icon>
+    Preferences
+  </button>
+  
+  <button mat-button (click)="navigateToAdmin()" *ngIf="authService.isAdmin()">
+    <mat-icon>admin_panel_settings</mat-icon>
+    Admin
+  </button>
+  
+  <button mat-button [matMenuTriggerFor]="userMenu">
+    <mat-icon>account_circle</mat-icon>
+    {{ currentUser?.name }}
+  </button>
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
+  </mat-menu>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
