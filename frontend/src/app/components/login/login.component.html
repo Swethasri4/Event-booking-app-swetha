@@ -1,0 +1,87 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>{{ isRegisterMode ? 'Register' : 'Login' }}</mat-card-title>
+      <mat-card-subtitle>Event Booking System</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- Login Form -->
+      <form *ngIf="!isRegisterMode" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="Enter your email">
+          <mat-icon matPrefix>email</mat-icon>
+          <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Email is required</mat-error>
+          <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Invalid email</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Enter your password">
+          <mat-icon matPrefix>lock</mat-icon>
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required</mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" class="full-width" [disabled]="loading || !loginForm.valid">
+          <mat-icon *ngIf="!loading">login</mat-icon>
+          <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+          {{ loading ? 'Logging in...' : 'Login' }}
+        </button>
+      </form>
+
+      <!-- Register Form -->
+      <form *ngIf="isRegisterMode" [formGroup]="registerForm" (ngSubmit)="onRegister()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" placeholder="Enter your name">
+          <mat-icon matPrefix>person</mat-icon>
+          <mat-error *ngIf="registerForm.get('name')?.hasError('required')">Name is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="Enter your email">
+          <mat-icon matPrefix>email</mat-icon>
+          <mat-error *ngIf="registerForm.get('email')?.hasError('required')">Email is required</mat-error>
+          <mat-error *ngIf="registerForm.get('email')?.hasError('email')">Invalid email</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Enter your password">
+          <mat-icon matPrefix>lock</mat-icon>
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="registerForm.get('password')?.hasError('required')">Password is required</mat-error>
+          <mat-error *ngIf="registerForm.get('password')?.hasError('minlength')">Min 6 characters</mat-error>
+        </mat-form-field>
+
+        <mat-checkbox formControlName="isAdmin" class="mb-16">Register as Admin</mat-checkbox>
+
+        <button mat-raised-button color="primary" type="submit" class="full-width" [disabled]="loading || !registerForm.valid">
+          <mat-icon *ngIf="!loading">person_add</mat-icon>
+          <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+          {{ loading ? 'Registering...' : 'Register' }}
+        </button>
+      </form>
+
+      <div class="demo-info">
+        <mat-divider class="mt-16 mb-16"></mat-divider>
+        <p><strong>Demo Accounts:</strong></p>
+        <p>Admin: admin&#64;example.com / admin123</p>
+        <p>User: user&#64;example.com / user123</p>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-button color="accent" (click)="toggleMode()" class="full-width">
+        {{ isRegisterMode ? 'Already have an account? Login' : "Don't have an account? Register" }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

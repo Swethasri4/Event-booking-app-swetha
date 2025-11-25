@@ -26,8 +26,10 @@ Creates demo accounts:
 ```powershell
 cd frontend
 npm install
-ng serve
+npm start
 ```
+
+**Note**: Use `npm start` instead of `ng serve` if Angular CLI is not globally installed.
 
 ### 4. Access Application
 Open: **http://localhost:4200** and login!
@@ -158,9 +160,14 @@ uvicorn main:app --reload
 # From frontend directory (in a new terminal)
 cd frontend
 
+# Install dependencies (first time only)
+npm install
+
 # Run Angular development server
-ng serve
+npm start
 ```
+
+**Alternative**: Use `ng serve` if Angular CLI is installed globally.
 
 **Frontend will run on**: `http://localhost:4200`
 
