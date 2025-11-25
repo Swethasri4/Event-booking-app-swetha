@@ -1,9 +1,59 @@
-node_modules/
+# ---------------------------
+# Repository-level .gitignore
+# ---------------------------
+# This project contains a Python backend and an Angular frontend.
+# Keep frontend-specific ignore rules in `frontend/.gitignore`.
+
+### Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+.Python
+env/
+venv/
+.venv/
+venv.bak/
+pip-wheel-metadata/
+*.egg-info/
+build/
 dist/
-.angular/
-.vscode/
-*.log
+
+### Python & web runtime files
+*.sqlite3
+instance/
+.webassets-cache
+
+### Node / JS (root-level)
+node_modules/
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+### Environment files / secrets
 .env
-.env.local
+.env.*
+secret_*.json
+
+### IDEs and editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+### OS files
+.DS_Store
+Thumbs.db
+
+### Logs, coverage and test artifacts
+*.log
 coverage/
+htmlcov/
+.nyc_output/
+
+### Misc
+*.iml
+/.history/
+
+# Keep frontend-specific patterns in frontend/.gitignore (e.g. dist/ and .angular/)
